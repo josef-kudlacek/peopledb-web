@@ -16,6 +16,7 @@
             <th scope="col">First Name</th>
             <th scope="col">DOB</th>
             <th scope="col">Salary</th>
+            <th scope="col">Email</th>
         </tr>
         </thead>
         <tbody>
@@ -25,6 +26,7 @@
             <td th:text="${person.firstName}">Otto</td>
             <td th:text="${{person.dob}}">@mdo</td>
             <td th:text="${{person.salary}}">@mdo</td>
+            <td th:text="${{person.email}}">@mdo</td>
         </tr>
         <tr th:remove="all">
             <th scope="row">2</th>
@@ -39,6 +41,32 @@
         </tr>
         </tbody>
         </table>
+        <form th:object="${person}" method="post">
+            <div class="form-group">
+                <label for="firstName">First Name</label>
+                <input type="text" class="form-control" id="firstName" aria-describedby="firstNameHelp"
+                       th:field="*{firstName}">
+            </div>
+            <div class="form-group">
+                <label for="lastName">Last Name</label>
+                <input type="text" class="form-control" id="lastName" aria-describedby="lastNameHelp"
+                       th:field="*{lastName}">
+            </div>
+            <div class="form-group">
+                <label for="dob">DOB</label>
+                <input type="date" class="form-control" id="dob" aria-describedby="dobHelp" th:field="*{dob}">
+            </div>
+            <div class="form-group">
+                <label for="salary">Salary</label>
+                <input type="number" class="form-control" id="salary" aria-describedby="salaryHelp"
+                       th:field="*{salary}">
+            </div>
+            <div class="form-group">
+                <label for="email">Email address</label>
+                <input type="text" class="form-control" id="email" aria-describedby="emailHelp" th:field="*{email}">
+            </div>
+            <button type="submit" class="btn btn-primary">Add Person</button>
+        </form>
     </div>
 </body>
 </html>
