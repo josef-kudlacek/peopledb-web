@@ -46,29 +46,48 @@
         </tbody>
         </table>
     <h2>Person form</h2>
-        <form th:object="${person}" method="post">
+    <form th:object="${person}" method="post" novalidate>
             <div class="form-group">
                 <label for="firstName">First Name</label>
-                <input type="text" class="form-control" id="firstName" aria-describedby="firstNameHelp"
+                <input type="text" class="form-control" id="firstName" th:errorclass="is-invalid"
+                       aria-describedby="firstNameHelp"
                        th:field="*{firstName}">
+                <div id="validationFirstName" class="invalid-feedback" th:errors="*{firstName}">
+                    Please choose a first name.
+                </div>
             </div>
             <div class="form-group">
                 <label for="lastName">Last Name</label>
-                <input type="text" class="form-control" id="lastName" aria-describedby="lastNameHelp"
+                <input type="text" class="form-control" id="lastName" th:errorclass="is-invalid"
+                       aria-describedby="lastNameHelp"
                        th:field="*{lastName}">
+                <div id="validationLastName" class="invalid-feedback" th:errors="*{lastName}">
+                    Please choose a last name.
+                </div>
             </div>
             <div class="form-group">
                 <label for="dob">DOB</label>
-                <input type="date" class="form-control" id="dob" aria-describedby="dobHelp" th:field="*{dob}">
+                <input type="date" class="form-control" id="dob" th:errorclass="is-invalid" aria-describedby="dobHelp"
+                       th:field="*{dob}">
+                <div id="validationDOB" class="invalid-feedback" th:errors="*{dob}">
+                    Please choose a date of birth.
+                </div>
             </div>
             <div class="form-group">
                 <label for="salary">Salary</label>
                 <input type="number" class="form-control" id="salary" aria-describedby="salaryHelp"
-                       th:field="*{salary}">
+                       th:errorclass="is-invalid" th:field="*{salary}">
+                <div id="validationSalary" class="invalid-feedback" th:errors="*{salary}">
+                    Please choose salary.
+                </div>
             </div>
             <div class="form-group">
                 <label for="email">Email address</label>
-                <input type="text" class="form-control" id="email" aria-describedby="emailHelp" th:field="*{email}">
+                <input type="text" class="form-control" id="email" th:errorclass="is-invalid"
+                       aria-describedby="emailHelp" th:field="*{email}">
+                <div id="validationEmail" class="invalid-feedback" th:errors="*{email}">
+                    Please choose an email.
+                </div>
             </div>
             <button type="submit" class="btn btn-primary">Add Person</button>
         </form>
