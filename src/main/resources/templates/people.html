@@ -8,23 +8,23 @@
 </head>
 <body>
 <div class="col-md-8 col-sm-11 mx-auto mt-5 my-5">
-    <h2>People list</h2>
+    <h2 th:text="#{people.list}">People list</h2>
     <form method="post">
         <table class="table table-bordered table-sm">
             <thead>
             <tr>
-                <th scope="col">Select</th>
+                <th scope="col" th:text="#{select}">Select</th>
                 <th scope="col">ID</th>
-                <th scope="col">Last Name</th>
-                <th scope="col">First Name</th>
-                <th scope="col">DOB</th>
-                <th scope="col">Salary</th>
-                <th scope="col" class="d-sm-none d-md-table-cell">Email</th>
+                <th scope="col" th:text="#{last.name}">Last Name</th>
+                <th scope="col" th:text="#{first.name}">First Name</th>
+                <th scope="col" th:text="#{dob}">DOB</th>
+                <th scope="col" th:text="#{salary}">Salary</th>
+                <th scope="col" th:text="#{email}" class="d-sm-none d-md-table-cell">Email</th>
             </tr>
             </thead>
             <tbody>
             <tr th:if="${#lists.isEmpty(people)}">
-                <td colspan="6" class="text-center">No data</td>
+                <td colspan="6" class="text-center" th:text="#{table.no.data}">No data</td>
             </tr>
             <tr th:each="person : ${people}">
                 <td><input type="checkbox" class="form-check-input" name="selections" th:value="${person.id}"/></td>
@@ -48,13 +48,15 @@
             </tr>
             </tbody>
         </table>
-        <button type="submit" name="edit" value="true" class="btn btn-warning mb-5 me-2">Edit</button>
-        <button type="submit" name="delete" value="true" class="btn btn-danger mb-5">Delete</button>
+        <button type="submit" name="edit" value="true" class="btn btn-warning mb-5 me-2" th:text="#{button.edit}">Edit
+        </button>
+        <button type="submit" name="delete" value="true" class="btn btn-danger mb-5" th:text="#{button.delete}">Delete
+        </button>
     </form>
-    <h2>Person form</h2>
+    <h2 th:text="#{person.form}">Person form</h2>
     <form th:object="${person}" method="post" novalidate>
             <div class="form-group">
-                <label for="firstName">First Name</label>
+                <label for="firstName" th:text="#{first.name}">First Name</label>
                 <input type="text" class="form-control" id="firstName" th:errorclass="is-invalid"
                        aria-describedby="firstNameHelp"
                        th:field="*{firstName}">
@@ -63,7 +65,7 @@
                 </div>
             </div>
             <div class="form-group">
-                <label for="lastName">Last Name</label>
+                <label for="lastName" th:text="#{last.name}">Last Name</label>
                 <input type="text" class="form-control" id="lastName" th:errorclass="is-invalid"
                        aria-describedby="lastNameHelp"
                        th:field="*{lastName}">
@@ -72,7 +74,7 @@
                 </div>
             </div>
             <div class="form-group">
-                <label for="dob">DOB</label>
+                <label for="dob" th:text="#{dob}">DOB</label>
                 <input type="date" class="form-control" id="dob" th:errorclass="is-invalid" aria-describedby="dobHelp"
                        th:field="*{dob}">
                 <div id="validationDOB" class="invalid-feedback" th:errors="*{dob}">
@@ -80,7 +82,7 @@
                 </div>
             </div>
             <div class="form-group">
-                <label for="salary">Salary</label>
+                <label for="salary" th:text="#{salary}">Salary</label>
                 <input type="number" class="form-control" id="salary" aria-describedby="salaryHelp"
                        th:errorclass="is-invalid" th:field="*{salary}">
                 <div id="validationSalary" class="invalid-feedback" th:errors="*{salary}">
@@ -88,15 +90,14 @@
                 </div>
             </div>
             <div class="form-group">
-                <label for="email">Email address</label>
+                <label for="email" th:text="#{email}">Email address</label>
                 <input type="text" class="form-control" id="email" th:errorclass="is-invalid"
                        aria-describedby="emailHelp" th:field="*{email}">
                 <div id="validationEmail" class="invalid-feedback" th:errors="*{email}">
                     Please choose an email.
                 </div>
-            </div>
         <input type="hidden" th:field="*{id}">
-        <button type="submit" class="btn btn-primary mt-2">Add Person</button>
+                <button type="submit" class="btn btn-primary mt-2" th:text="#{button.save}">Add Person</button>
         </form>
     </div>
 </body>
