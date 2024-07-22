@@ -20,6 +20,7 @@
                 <th scope="col" th:text="#{dob}">DOB</th>
                 <th scope="col" th:text="#{salary}">Salary</th>
                 <th scope="col" th:text="#{email}" class="d-sm-none d-md-table-cell">Email</th>
+                <th scope="col" th:text="#{photo.file.name}">Salary</th>
             </tr>
             </thead>
             <tbody>
@@ -34,6 +35,7 @@
                 <td th:text="${#temporals.format(person.dob, 'd. MMMM, yyyy')}">@mdo</td>
                 <td th:text="${{person.salary}}">@mdo</td>
                 <td th:text="${person.email}" class="d-sm-none d-md-table-cell">@mdo</td>
+                <td th:text="${person.photoFileName}" class="d-sm-none d-md-table-cell">@mdo</td>
             </tr>
             <tr th:remove="all">
                 <th scope="row">2</th>
@@ -54,7 +56,7 @@
         </button>
     </form>
     <h2 th:text="#{person.form}">Person form</h2>
-    <form th:object="${person}" method="post" novalidate>
+    <form th:object="${person}" method="post" novalidate enctype="multipart/form-data">
             <div class="form-group">
                 <label for="firstName" th:text="#{first.name}">First Name</label>
                 <input type="text" class="form-control" id="firstName" th:errorclass="is-invalid"
@@ -96,9 +98,13 @@
                 <div id="validationEmail" class="invalid-feedback" th:errors="*{email}">
                     Please choose an email.
                 </div>
-        <input type="hidden" th:field="*{id}">
+                <div class="mb-3">
+                    <label for="photoFilename" class="form-label" th:text="#{photo.file.name}">Photo File</label>
+                    <input class="form-control" type="file" id="photoFilename" th:field="*{photoFileName}">
+                </div>
+                <input type="hidden" th:field="*{id}">
                 <button type="submit" class="btn btn-primary mt-2" th:text="#{button.save}">Add Person</button>
-        </form>
+    </form>
     </div>
 </body>
 </html>
