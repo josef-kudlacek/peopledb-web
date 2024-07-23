@@ -3,6 +3,8 @@ package eu.kudljo.peopledbweb.business.service;
 import eu.kudljo.peopledbweb.business.model.Person;
 import eu.kudljo.peopledbweb.data.FileStorageRepository;
 import eu.kudljo.peopledbweb.data.PersonRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -34,6 +36,10 @@ public class PersonService {
 
     public Iterable<Person> findAll() {
         return personRepository.findAll();
+    }
+
+    public Page<Person> findAll(Pageable pageable) {
+        return personRepository.findAll(pageable);
     }
 
     @Transactional
