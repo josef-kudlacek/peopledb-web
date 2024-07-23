@@ -88,7 +88,7 @@ public class PeopleController {
     public String deletePeople(@RequestParam Optional<List<Long>> selections) {
         log.info(selections);
         if (selections.isPresent()) {
-            personRepository.deleteAllById(selections.get());
+            personService.deleteAllById(selections.get());
         }
         return "redirect:people";
     }
