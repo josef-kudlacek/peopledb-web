@@ -11,6 +11,10 @@ import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Collection;
+import java.util.Objects;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Repository
 public class FileStorageRepository {
@@ -40,9 +44,12 @@ public class FileStorageRepository {
         return Path.of(storageFolder).resolve(filename).normalize();
     }
 
-    public void deleteAllByName(Iterable<String> fileNames) {
+    public void deleteAllByName(Collection<String> fileNames) {
         try {
-            for (String fileName : fileNames) {
+            Set<String> filteredFileNames = fileNames.stream()
+                    .filter(Objects::nonNull)
+                    .collect(Collectors.toSet());
+            for (String fileName : filteredFileNames) {
                 Path filePath = getFilePath(fileName);
                 Files.deleteIfExists(filePath);
             }
