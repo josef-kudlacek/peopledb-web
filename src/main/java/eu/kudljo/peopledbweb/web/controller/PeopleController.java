@@ -1,6 +1,7 @@
 package eu.kudljo.peopledbweb.web.controller;
 
 import eu.kudljo.peopledbweb.business.model.Person;
+import eu.kudljo.peopledbweb.business.service.PersonService;
 import eu.kudljo.peopledbweb.data.FileStorageRepository;
 import eu.kudljo.peopledbweb.data.PersonRepository;
 import eu.kudljo.peopledbweb.exception.StorageException;
@@ -29,14 +30,18 @@ public class PeopleController {
     public static final String DISPOSITION = """
              attachment; filename="%s"
             """;
-    private PersonRepository personRepository;
+    private final PersonRepository personRepository;
 
-    private FileStorageRepository fileStorageRepository;
+    private final FileStorageRepository fileStorageRepository;
+
+    private final PersonService personService;
 
     public PeopleController(PersonRepository personRepository,
-                            FileStorageRepository fileStorageRepository) {
+                            FileStorageRepository fileStorageRepository,
+                            PersonService personService) {
         this.personRepository = personRepository;
         this.fileStorageRepository = fileStorageRepository;
+        this.personService = personService;
     }
 
     @ModelAttribute("people")
@@ -57,8 +62,7 @@ public class PeopleController {
         log.info("Errors: " + errors);
         if (!errors.hasErrors()) {
             try {
-                fileStorageRepository.save(photoFile.getOriginalFilename(), photoFile.getInputStream());
-                personRepository.save(person);
+                personService.save(person, photoFile.getInputStream());
                 return "redirect:people";
             } catch (StorageException e) {
                 model.addAttribute("errorMsg", "System is currently unable to accept photo fies in this time.");
